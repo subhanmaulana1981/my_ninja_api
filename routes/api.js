@@ -12,8 +12,11 @@ router.get("/ninjas", function(req, res) {
 // add a new ninja to the db
 router.post("/ninjas", function(req, res) {
     console.log("permintaan dengan metode POST dari klien");
+    console.log(req.body);
     res.send({
-        type: "POST"
+        type: "POST",
+        name: req.body.name,
+        rank: req.body.rank
     });
 });
 

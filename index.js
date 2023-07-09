@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+
+// body-parser middleware
+app.use(bodyParser.json());
 
 // importing the router we've just made
 const routes = require("./routes/api");
+// initialize routes and use it with our app
+app.use("/api", routes);
 
 // listening for request
 app.listen(process.env.port || 4000, function() {
@@ -17,6 +23,3 @@ app.listen(process.env.port || 4000, function() {
     });
     // res.end();
 }); */
-
-// initialize routes and use it with our app
-app.use("/api", routes);
