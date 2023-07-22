@@ -7,8 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 /* connect to mongodb */
-mongoose.connect("mongodb://root:$Piderm4n@localhost:27017/ninjago");
-
+mongoose.connect("mongodb://root:$Piderm4n@localhost:27017/admin");
 mongoose.Promise = global.Promise;
 
 /* middleware(s) */
