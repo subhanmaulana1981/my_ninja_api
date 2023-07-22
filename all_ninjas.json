@@ -1,0 +1,37 @@
+[
+    {
+        "name": "mario",
+        "rank": "white belt",
+        "available": false
+    },
+
+    {
+        "name": "luigi",
+        "rank": "yellow belt",
+        "available":true
+    },
+
+    {
+        "name": "peach",
+        "rank": "green belt",
+        "available":true
+    },
+
+    {
+        "name": "toad",
+        "rank": "blue belt",
+        "available":false
+    },
+
+    {
+        "name": "yoshi",
+        "rank": "brown belt",
+        "available": true
+    },
+
+    {
+        "name": "coopa",
+        "rank": "black belt",
+        "available":true
+    }
+]

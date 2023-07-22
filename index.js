@@ -13,6 +13,10 @@ mongoose.Promise = global.Promise;
 /* middleware(s) */
 app.use(bodyParser.json());
 app.use("/api", routes);
+app.use(function (err, req, res, next) {
+    console.log(err);
+    res.status(422).send({error: err.message});
+});
 
 // listening for request
 app.listen(process.env.port || 4000, function() {
