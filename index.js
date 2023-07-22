@@ -1,9 +1,14 @@
 const express = require("express");
 const routes = require("./routes/api");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 /* our api-app */
 const app = express();
+
+/* connect to mongodb */
+mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
+mongoose.Promise = global.Promise;
 
 /* middleware(s) */
 app.use(bodyParser.json());

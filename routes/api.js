@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Ninja = require("../models/ninjas");
 
 // get a list of ninjas from the db
 router.get("/ninjas", function(req, res) {
@@ -11,13 +12,26 @@ router.get("/ninjas", function(req, res) {
 
 // add a new ninja to the db
 router.post("/ninjas", function(req, res) {
-    console.log("permintaan dengan metode POST dari klien");
+    // a long way
+    /* var ninja = new Ninja(req.body);
+    ninja.save().then(function (ninja) {
+        res.send(ninja);
+        console.log(ninja);
+    }); */
+    
+    // simple way
+    Ninja.create(req.body).then(function (ninja) {
+        res.send(ninja);
+        console.log(ninja);
+    });
+
+    /* console.log("permintaan dengan metode POST dari klien");
     console.log(req.body);
     res.send({
         type: "POST",
         name: req.body.name,
         rank: req.body.rank
-    });
+    }); */
 });
 
 // update a ninja in the db
