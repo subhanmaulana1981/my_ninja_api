@@ -17,6 +17,17 @@ router.get("/ninjas", function(req, res, next) {
     }); */
 }); 
 
+// get a (one) ninja by id from the db
+router.get("/ninjas/:id", function(req, res, next) {
+    Ninja.findById({_id: req.params.id})
+    .then(function (ninja) {
+        res.send(ninja);
+        console.log(ninja);
+    }).catch(next);
+
+}); 
+
+
 // add a new ninja to the db
 router.post("/ninjas", function(req, res, next) {
     // a long way
