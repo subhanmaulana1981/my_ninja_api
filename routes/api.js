@@ -6,7 +6,8 @@ const Ninja = require("../models/ninjas");
 router.get("/ninjas", function(req, res, next) {
     Ninja.find()
     .then(function (ninjas) {
-        res.send(ninjas)
+        res.send(ninjas);
+        console.log(ninjas);
     })
     .catch(next);
 
@@ -47,7 +48,8 @@ router.put("/ninjas/:id", function(req, res, next) {
     .then(function (ninja) {
         Ninja.findOne({_id: req.params.id})
         .then(function () {
-            res.send(ninja)
+            res.send(ninja);
+            console.log(ninjas);
         })
     })
     .catch(next);
@@ -67,7 +69,10 @@ router.delete("/ninjas/:id", function(req, res, next) {
     }); */
 
     Ninja.findByIdAndRemove({_id: req.params.id})
-    .then(function (ninja) {res.send(ninja)})
+    .then(function (ninja) {
+        res.send(ninja);
+        console.log(ninjas);
+    })
     .catch(next);
 
 });
