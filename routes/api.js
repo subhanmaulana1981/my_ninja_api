@@ -85,7 +85,7 @@ router.delete("/ninjas/:id", function(req, res, next) {
     Ninja.findByIdAndRemove({_id: req.params.id})
     .then(function (ninja) {
         res.send(ninja);
-        console.log(ninjas);
+        console.log(ninja);
     })
     .catch(next);
 
