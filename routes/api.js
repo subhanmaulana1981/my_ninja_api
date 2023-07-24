@@ -21,8 +21,11 @@ router.get("/ninjas", function(req, res, next) {
 router.get("/ninjas/:id", function(req, res, next) {
     Ninja.findById({_id: req.params.id})
     .then(function (ninja) {
-        res.send(ninja);
-        console.log(ninja);
+        Ninja.findOne({_id: req.params.id})
+        .then(function (ninja) {
+            res.send(ninja);
+            console.log(ninja);
+        })
     }).catch(next);
 
 }); 
@@ -58,7 +61,7 @@ router.put("/ninjas/:id", function(req, res, next) {
     Ninja.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(function (ninja) {
         Ninja.findOne({_id: req.params.id})
-        .then(function () {
+        .then(function (ninja) {
             res.send(ninja);
             console.log(ninjas);
         })
