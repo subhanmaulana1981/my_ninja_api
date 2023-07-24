@@ -27,9 +27,10 @@ app.listen(process.env.port || 4000, function() {
 
 // method http get starting point
 app.get("/api", function(req, res) {
-    console.log("Ini adalah permintaan dengan metode GET dari klien");
     res.send({
         name: "Subhan"
     });
+    console.log("Ini adalah permintaan dengan metode GET dari klien");
+
     // res.end();
 });
