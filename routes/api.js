@@ -31,7 +31,7 @@ router.get("/ninjas/:id", function(req, res, next) {
 });
 
 // get a ninja sounds like
-router.get("ninjas/:name", function(req, res, next) {
+router.get("ninjas/name/:name", function(req, res, next) {
     Ninja.find({name: ` / ${req.params.name} / `})
     .then(function (ninja) {
         res.send(ninja);
