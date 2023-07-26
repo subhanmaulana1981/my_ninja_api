@@ -28,8 +28,16 @@ router.get("/ninjas/:id", function(req, res, next) {
         })
     }).catch(next);
 
-}); 
+});
 
+// get a ninja sounds like
+router.get("ninjas/:name", function(req, res, next) {
+    Ninja.find({name: ` / ${req.params.name} / `})
+    .then(function (ninja) {
+        res.send(ninja);
+        console.log(ninja);
+    }).catch(next);
+});
 
 // add a new ninja to the db
 router.post("/ninjas", function(req, res, next) {
