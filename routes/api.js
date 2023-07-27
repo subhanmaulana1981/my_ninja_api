@@ -1,24 +1,25 @@
 const express = require("express");
+const { default: mongoose } = require("mongoose");
 const router = express.Router();
 const Ninja = require("../models/ninjas");
+const MongoQS = require("mongo-querystring");
+const { query } = require("express");
+const { json } = require("body-parser");
+const qs = require("qs");
 
 // get a list of ninjas from the db
 router.get("/ninjas", function(req, res, next) {
-    Ninja.find()
+    Ninja.find({})
     .then(function (ninjas) {
         res.send(ninjas);
         console.log(ninjas);
     })
     .catch(next);
+});
 
-    /* console.log("permintaan dengan metode GET dari klien");
-    res.send({
-        type: "GET"
-    }); */
-}); 
 
 // get a (one) ninja by id from the db
-router.get("/ninjas/:id", function(req, res, next) {
+router.get("/ninja/:id", function(req, res, next) {
     Ninja.findById({_id: req.params.id})
     .then(function (ninja) {
         Ninja.findOne({_id: req.params.id})
@@ -31,9 +32,8 @@ router.get("/ninjas/:id", function(req, res, next) {
 });
 
 // get a ninja sounds like
-router.get("/ninjas", function(req, res, next) {
-    let stringNama = req.query;
-    Ninja.find({name: stringNama})
+router.get("/ninja", function(req, res, next) {
+    Ninja.find({name: `${req.query.name}`})
     .then(function (ninja) {
         res.send(ninja);
         console.log(ninja);
@@ -41,7 +41,7 @@ router.get("/ninjas", function(req, res, next) {
 });
 
 // add a new ninja to the db
-router.post("/ninjas", function(req, res, next) {
+router.post("/ninja", function(req, res, next) {
     // a long way
     /* var ninja = new Ninja(req.body);
     ninja.save().then(function (ninja) {
@@ -66,7 +66,7 @@ router.post("/ninjas", function(req, res, next) {
 });
 
 // update a ninja in the db
-router.put("/ninjas/:id", function(req, res, next) {
+router.put("/ninja/:id", function(req, res, next) {
     Ninja.findByIdAndUpdate({_id: req.params.id}, req.body)
     .then(function (ninja) {
         Ninja.findOne({_id: req.params.id})
@@ -84,7 +84,7 @@ router.put("/ninjas/:id", function(req, res, next) {
 });
 
 // delete a ninja from the db
-router.delete("/ninjas/:id", function(req, res, next) {
+router.delete("/ninja/:id", function(req, res, next) {
     /* console.log(req.params.id);
     console.log("permintaan dengan metode DELETE dari klien");
     res.send({

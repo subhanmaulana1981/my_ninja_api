@@ -13,10 +13,7 @@ const NinjaSchema = new Schema({
     available: {
         type: Boolean,
         default: false,
-    },
-
-    // add in geo location
-
+    }
 });
 
 const Ninja = mongoose.model("ninja", NinjaSchema);

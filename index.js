@@ -11,9 +11,12 @@ const app = express();
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
 mongoose.Promise = global.Promise;
 
+// app.set("querystring", "simple");
+
 /* middleware(s) */
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", routes);
 app.use(function (err, req, res, next) {
     console.log(err);
@@ -28,7 +31,7 @@ app.listen(process.env.port || 4000, function() {
 // method http get starting point
 app.get("/api", function(req, res) {
     res.send({
-        name: "Subhan"
+        name: "Subhan Maulana made for CDC Global Informatika July 2023"
     });
     console.log("Ini adalah permintaan dengan metode GET dari klien");
 
