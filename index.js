@@ -11,8 +11,6 @@ const app = express();
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
 mongoose.Promise = global.Promise;
 
-// app.set("querystring", "simple");
-
 /* middleware(s) */
 app.use(cors());
 app.use(bodyParser.json());

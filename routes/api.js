@@ -1,5 +1,4 @@
 const express = require("express");
-const { default: mongoose } = require("mongoose");
 const router = express.Router();
 const Ninja = require("../models/ninjas");
 
@@ -17,7 +16,7 @@ router.get("/ninjas", function(req, res, next) {
 // get a (one) ninja by id from the db
 router.get("/ninja/:id", function(req, res, next) {
     Ninja.findById({_id: req.params.id})
-    .then(function (ninja) {
+    .then(function () {
         Ninja.findOne({_id: req.params.id})
         .then(function (ninja) {
             res.send(ninja);
@@ -49,7 +48,7 @@ router.post("/ninja", function(req, res, next) {
 // update a ninja in the db
 router.put("/ninja/:id", function(req, res, next) {
     Ninja.findByIdAndUpdate({_id: req.params.id}, req.body)
-    .then(function (ninja) {
+    .then(function () {
         Ninja.findOne({_id: req.params.id})
         .then(function (ninja) {
             res.send(ninja);
