@@ -1,19 +1,19 @@
+/* express app */
 const express = require("express");
 const routes = require("./routes/api");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Server = require("socket.io");
+const socket = require("socket.io");
 
-/* our api-app */
 const app = express();
-const io = new Server(4000);
 
 /* connect to mongodb */
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
 mongoose.Promise = global.Promise;
 
 /* middleware(s) */
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +24,7 @@ app.use(function (err, req, res, next) {
 });
 
 // listening for request
-app.listen(process.env.port || 4000, function() {
+const server = app.listen(process.env.port || 4000, function() {
     console.log("sedang mendengarkan permintaan dari klien");
 });
 
@@ -33,18 +33,11 @@ app.get("/api", function(req, res) {
     res.send({
         name: "Subhan Maulana made for CDC Global Informatika July 2023"
     });
-    console.log("Ini adalah permintaan dengan metode GET dari klien");
-
-    // res.end();
 });
 
-// messaging through web socket
-io.on("connection", (socket) => {
-    // send a message to the client
-    socket.emit("halo", "world");
-
-    // receive a message from the client
-    socket.on("howdy", (arg) => {
-        console.log(arg);
-    });
+/* websocket server */ 
+const io = socket(server);
+io.on("howdy", function (socket) {
+    socket.emit("hello", "world");
+    console.log("socket connection has been made");
 });
