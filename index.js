@@ -3,9 +3,11 @@ const routes = require("./routes/api");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const Server = require("socket.io");
 
 /* our api-app */
 const app = express();
+const io = new Server(4000);
 
 /* connect to mongodb */
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
@@ -34,4 +36,15 @@ app.get("/api", function(req, res) {
     console.log("Ini adalah permintaan dengan metode GET dari klien");
 
     // res.end();
+});
+
+// messaging through web socket
+io.on("connection", (socket) => {
+    // send a message to the client
+    socket.emit("halo", "world");
+
+    // receive a message from the client
+    socket.on("howdy", (arg) => {
+        console.log(arg);
+    });
 });
