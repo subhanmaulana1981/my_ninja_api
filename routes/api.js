@@ -7,7 +7,7 @@ router.get("/ninjas", function(req, res, next) {
     Ninja.find({})
     .then(function (ninjas) {
         res.send(ninjas);
-        console.log(ninjas);
+        // console.log(ninjas);
     })
     .catch(next);
 });
