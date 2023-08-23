@@ -5,9 +5,6 @@ const bodyParser = require("body-parser");
 const { default: mongoose } = require("mongoose");
 const cors = require("cors");
 
-/* web socket channel */
-// const { WebSocket, WebSocketServer } = require("ws");
-
 /* connect to mongodb */
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
 mongoose.Promise = global.Promise;
@@ -46,31 +43,9 @@ io.on("connection", function (client) {
     });
 });
 
-/* web  socket channel */
-/* const wss = new WebSocketServer({
-    server: app
-});
-wss.on("connection", function (koneksi) {
-    // var pesanKoneksi = koneksi.send("Echo message sent back from server: " + message);
-    console.log("ada koneksi nih");
-    console.log(koneksi);
-
-    koneksi.on("open", function (stream) {
-        koneksi.send("open nih");
-        console.log("open nih");
-    });
-
-    koneksi.on("message", function (klien) {
-        var pesanKlien = koneksi.send("Hello! Message from server. You've just connected to the server!!");
-        console.log("ada pesan nih");
-        console.log(pesanKlien);
-    });
-
-}); */
-
 /* middleware(s) */
 var corsOptions = {
-    origin: "http://127.0.0.1:4000",
+    origin: "http://154.56.39.55:5135",
     optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
