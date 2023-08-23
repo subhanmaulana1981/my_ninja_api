@@ -26,7 +26,15 @@ var io = socket(server);
 /* ketika terjadi koneksi */
 io.on("connection", function (client) {
     console.log(`${client.id} connected`);
-    io.emit("pesan", `hai`);
+    client.on("connection", function (data) {
+        console.log(data);
+    });
+    
+    /* feedBack broadCast */
+    io.emit("connection", {
+        "nama": "server",
+        "lokasi": "singapore"
+    });
 
     /* ketika ada pesan dari klien */
     client.on("pesan", function (data) {
@@ -35,10 +43,8 @@ io.on("connection", function (client) {
 
         /* untuk broadCast ke klien(s) */
         io.emit("pesan", "new");
-
     });
 });
-
 
 /* web  socket channel */
 /* const wss = new WebSocketServer({
@@ -62,14 +68,13 @@ wss.on("connection", function (koneksi) {
 
 }); */
 
-
 /* middleware(s) */
-/* var corsOptions = {
+var corsOptions = {
     origin: "http://127.0.0.1:4000",
     optionSuccessStatus: 200
 }
-app.use(cors(corsOptions)); */
-app.use(cors());
+app.use(cors(corsOptions));
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", routes);
