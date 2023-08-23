@@ -7,6 +7,7 @@ const cors = require("cors");
 
 /* connect to mongodb */
 mongoose.connect("mongodb://127.0.0.1:27017/ninjago");
+// mongoose.connect("mongodb://root:$Piderm4n@127.0.0.1:27017/ninjago");
 mongoose.Promise = global.Promise;
 
 /* express application */
@@ -45,7 +46,7 @@ io.on("connection", function (client) {
 
 /* middleware(s) */
 var corsOptions = {
-    origin: "http://154.56.39.55:5135",
+    origin: "http://154.56.39.55:4000",
     optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
