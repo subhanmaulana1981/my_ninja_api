@@ -39,7 +39,7 @@ io.on("connection", function (client) {
         // client.emit("message", "1");
 
         /* untuk broadCast ke klien(s) */
-        io.emit("pesan", "new");
+        io.emit("pesan", `${data}`);
     });
 });
 
