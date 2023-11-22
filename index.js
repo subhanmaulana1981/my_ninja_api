@@ -12,7 +12,7 @@ mongoose.Promise = global.Promise;
 /* express application */
 const app = express();
 // listening for request
-var server = app.listen(4000, function() {
+var server = app.listen(5000, function() {
     console.log("sedang mendengarkan permintaan dari klien");
 });
 
@@ -35,7 +35,7 @@ io.on("connection", function (client) {
 
     /* ketika ada pesan dari klien */
     client.on("pesan", function (data) {
-        console.log(`pesan dari klien ${client.id}: ${data}`);
+        console.log(`pesan dari klien ${client.id}: ${JSON.stringify(data)}`);
         // client.emit("message", "1");
 
         /* untuk broadCast ke klien(s) */
@@ -44,12 +44,12 @@ io.on("connection", function (client) {
 });
 
 /* middleware(s) */
-/* var corsOptions = {
-    origin: "http://127.0.0.1:4000",
+var corsOptions = {
+    origin: "http://127.0.0.1:5000",
     optionSuccessStatus: 200
-} */
-// app.use(cors(corsOptions));
-app.use(cors());
+}
+app.use(cors(corsOptions));
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", routes);
